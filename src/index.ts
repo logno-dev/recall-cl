@@ -16,7 +16,7 @@ const app = new Hono();
 // Configure your Turso database client
 const db = createClient({
   url:
-    process.env.TURSO_DATABASE_URL || "",
+    process.env.TURSO_DATABASE_URL || "libsql://recall-logno-dev.aws-us-west-2.turso.io",
   authToken: process.env.TURSO_AUTH_TOKEN || "",
 });
 
