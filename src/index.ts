@@ -16,8 +16,7 @@ const app = new Hono();
 // Configure your Turso database client
 const db = createClient({
   url:
-    process.env.TURSO_DATABASE_URL ||
-    "libsql://recall-logno-dev.aws-us-west-2.turso.io",
+    process.env.TURSO_DATABASE_URL || "",
   authToken: process.env.TURSO_AUTH_TOKEN || "",
 });
 
@@ -296,8 +295,8 @@ app.get("/usda-sync", async (c) => {
             report.field_product_items || null,
             report.field_qty_recovered || null,
             report.field_recall_reason || null,
-            String(report.field_recall_date).replaceAll("-", "") || null,
-            String(report.field_closed_date).replaceAll("-", "") || null,
+            report.field_recall_date.toString().replaceAll("-", "") || null,
+            report.field_closed_date.toString().replaceAll("-", "") || null,
             report.field_last_modified || null,
             report.field_recall_url || null,
             report.field_summary || null
@@ -318,8 +317,8 @@ app.get("/usda-sync", async (c) => {
 
     return c.json({
       status: "success",
-      message: `Processed ${recalls.length} recalls. Inserted: ${inserted}, Errors: ${errors}`,
-      totalRecalls: recalls.length,
+      message: `Processed ${data.length} recalls. Inserted: ${inserted}, Errors: ${errors}`,
+      totalRecalls: data.length,
     });
 
   } catch (error) {
