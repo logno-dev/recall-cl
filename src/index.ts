@@ -13,6 +13,8 @@ import path from "path"
 
 const app = new Hono();
 
+
+
 // Configure your Turso database client
 const db = createClient({
   url:
@@ -23,7 +25,7 @@ const db = createClient({
 // Endpoint to trigger data fetching and loading
 app.get("/", async (c) => {
   return c.text(
-    "FSIS Recalls API to Turso Database loader. Use /load-data to fetch and load data.",
+    `FSIS Recalls API to Turso Database loader. Use /load-data to fetch and load data. ${process.env.ENV_TEST}`,
   );
 });
 
