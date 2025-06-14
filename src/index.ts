@@ -5,6 +5,7 @@ import { createClient } from "@libsql/client";
 import axios from "axios";
 import fs from "fs"
 import path from "path"
+import { cors } from "hono/cors";
 
 // import * as FDA from "../data/fda.json";
 // import * as USDA from "../data/usda.json";
@@ -12,6 +13,8 @@ import path from "path"
 
 
 const app = new Hono();
+
+app.use(cors({ origin: "*" }))
 
 
 
